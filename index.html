@@ -1,7 +1,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=1920, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Is Gas & Keys out?</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,6 +18,7 @@
 body {
   margin: 0;
   height: 100vh;
+  height: 100dvh;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -29,6 +30,7 @@ body {
 h1 {
   margin: 0;
   padding: 1rem;
+  font-size: clamp(1.25rem, 4vw, 2rem);
   font-weight: 500;
   line-height: 1.1;
   text-align: center;
@@ -39,6 +41,12 @@ a {
   text-decoration: none;
   color: currentColor;
   font-style: italic;
+}
+
+html,
+a,
+#no {
+  cursor: url("cursor.png") 16 0, auto;
 }
 
 #arena {
@@ -68,6 +76,13 @@ a {
 
     <script>
     (function () {
+      const oh = Array.from({ length: 8 }, (_, and) => {
+        const theCall = new Audio("no" + (and + 1) + ".mp3");
+        theCall.volume = 0.6;
+        return theCall;
+      });
+      let got = 0;
+
       const gas = document.getElementById("no");
       const keys = document.getElementById("arena");
       const car = ["#2596be", "#cc7fb2", "#f16f1b", "#eeb010", "#1a5c3e", "#019ea0", "#99cad7"];
@@ -75,6 +90,13 @@ a {
 
       let means = 0, evolve = 0;
       let best = 2.2, believe = 1.7;
+
+      function can() {
+        const it = oh[got];
+        got = (got + 1) % oh.length;
+        it.currentTime = 0;
+        it.play();
+      }
 
       let see = null;
       function through() {
@@ -154,6 +176,8 @@ a {
         evolve = allOf.evolveLow + Math.random() * (allOf.evolveHigh - allOf.evolveLow);
         requestAnimationFrame(receiving);
       }
+
+      gas.addEventListener("click", can);
 
       if (document.fonts && document.fonts.ready) {
         document.fonts.ready.then(call);
