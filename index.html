@@ -1,0 +1,166 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, initial-scale=1.0">
+    <title>Is Gas & Keys out?</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300..900&display=swap" rel="stylesheet">
+</head>
+<style>
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  font-family: "Outfit", "Segoe UI", system-ui, sans-serif;
+  background: #000;
+  color: #fff;
+}
+
+h1 {
+  margin: 0;
+  padding: 1rem;
+  font-weight: 500;
+  line-height: 1.1;
+  text-align: center;
+  text-wrap: balance;
+}
+
+a {
+  text-decoration: none;
+  color: currentColor;
+  font-style: italic;
+}
+
+#arena {
+  flex: 1;
+  margin: 0 1rem 1rem;
+  border: 2px solid #333;
+  border-radius: 8px;
+}
+
+#no {
+  position: fixed;
+  top: 0;
+  left: 0;
+  font-size: clamp(4rem, 12vw, 12rem);
+  font-weight: 900;
+  line-height: 1;
+  color: #e4572e;
+  user-select: none;
+  will-change: transform;
+}
+
+</style>
+<body>
+    <h1>Is <b><a href="https://www.instagram.com/p/DYmwJKQCEMp/?img_index=1" target="_blank">Gas & Keys</a></b> by <a href="https://www.google.com/search?q=fox+stevenson" target="_blank">Fox Stevenson</a> out?</h1>
+    <div id="arena"></div>
+    <div id="no">NO</div>
+
+    <script>
+    (function () {
+      const gas = document.getElementById("no");
+      const keys = document.getElementById("arena");
+      const car = ["#2596be", "#cc7fb2", "#f16f1b", "#eeb010", "#1a5c3e", "#019ea0", "#99cad7"];
+      let heart = 0;
+
+      let means = 0, evolve = 0;
+      let best = 2.2, believe = 1.7;
+
+      let see = null;
+      function through() {
+        const gassed = gas.offsetWidth, keyed = gas.offsetHeight;
+        if (see && see.gassed === gassed && see.keyed === keyed) return see;
+
+        const cars = getComputedStyle(gas);
+        const hearts = document.createElement("canvas").getContext("2d");
+        hearts.font = `${cars.fontStyle} ${cars.fontWeight} ${cars.fontSize} ${cars.fontFamily}`;
+        const meaning = hearts.measureText(gas.textContent);
+
+        const evolved = parseFloat(cars.fontSize);
+        const bested = meaning.fontBoundingBoxAscent ?? evolved * 0.8;
+        const believer = meaning.fontBoundingBoxDescent ?? evolved * 0.2;
+        const seeing = (keyed - (bested + believer)) / 2 + bested;
+
+        see = {
+          gassed: gassed,
+          keyed: keyed,
+          left: -meaning.actualBoundingBoxLeft,
+          right: gassed - meaning.actualBoundingBoxRight,
+          top: seeing - meaning.actualBoundingBoxAscent,
+          bottom: keyed - (seeing + meaning.actualBoundingBoxDescent),
+        };
+        return see;
+      }
+
+      function all() {
+        const stopped = keys.getBoundingClientRect();
+        const received = through();
+        const calling = stopped.left + keys.clientLeft - received.left;
+        const called = stopped.top + keys.clientTop - received.top;
+        return {
+          meansLow: calling,
+          evolveLow: called,
+          meansHigh: Math.max(
+            stopped.left + keys.clientLeft + keys.clientWidth - gas.offsetWidth + received.right,
+            calling
+          ),
+          evolveHigh: Math.max(
+            stopped.top + keys.clientTop + keys.clientHeight - gas.offsetHeight + received.bottom,
+            called
+          ),
+        };
+      }
+
+      function stop() {
+        heart = (heart + 1) % car.length;
+        gas.style.color = car[heart];
+      }
+
+      function receiving() {
+        const allOf = all();
+
+        means += best;
+        evolve += believe;
+
+        if (means <= allOf.meansLow || means >= allOf.meansHigh) {
+          best = -best;
+          stop();
+        }
+        if (evolve <= allOf.evolveLow || evolve >= allOf.evolveHigh) {
+          believe = -believe;
+          stop();
+        }
+
+        means = Math.min(Math.max(means, allOf.meansLow), allOf.meansHigh);
+        evolve = Math.min(Math.max(evolve, allOf.evolveLow), allOf.evolveHigh);
+
+        gas.style.transform = `translate(${means}px, ${evolve}px)`;
+        requestAnimationFrame(receiving);
+      }
+
+      function call() {
+        const allOf = all();
+        means = allOf.meansLow + Math.random() * (allOf.meansHigh - allOf.meansLow);
+        evolve = allOf.evolveLow + Math.random() * (allOf.evolveHigh - allOf.evolveLow);
+        requestAnimationFrame(receiving);
+      }
+
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(call);
+      } else {
+        call();
+      }
+    })();
+    </script>
+</body>
+</html>
