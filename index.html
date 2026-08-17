@@ -3,6 +3,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Is Gas & Keys out?</title>
+    <meta name="description" content="Is Gas &amp; Keys by Fox Stevenson out?">
+    <meta name="theme-color" content="#e4572e">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="gasandkeys.com">
+    <meta property="og:title" content="Is Gas &amp; Keys out?">
+    <meta property="og:description" content="NO">
+    <meta property="og:url" content="https://gasandkeys.com/">
+
+    <meta name="twitter:card" content="summary">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300..900&display=swap" rel="stylesheet">
@@ -50,10 +61,24 @@ a,
 }
 
 #arena {
+  position: relative;
   flex: 1;
   margin: 0 1rem 1rem;
   border: 2px solid #333;
   border-radius: 8px;
+}
+
+#tally {
+  position: absolute;
+  top: 0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: none;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #666;
+  user-select: none;
+  pointer-events: none;
 }
 
 #no {
@@ -71,7 +96,7 @@ a,
 </style>
 <body>
     <h1>Is <b><a href="https://www.instagram.com/p/DYmwJKQCEMp/?img_index=1" target="_blank">Gas & Keys</a></b> by <a href="https://www.google.com/search?q=fox+stevenson" target="_blank">Fox Stevenson</a> out?</h1>
-    <div id="arena"></div>
+    <div id="arena"><div id="tally"></div></div>
     <div id="no">NO</div>
 
     <script>
@@ -85,13 +110,27 @@ a,
 
       const gas = document.getElementById("no");
       const keys = document.getElementById("arena");
+      const you = document.getElementById("tally");
       const car = ["#2596be", "#cc7fb2", "#f16f1b", "#eeb010", "#1a5c3e", "#019ea0", "#99cad7"];
       let heart = 0;
+      let by = 0;
 
       let means = 0, evolve = 0;
       let best = 2.2, believe = 1.7;
 
       function can() {
+        const just = Math.random();
+        if (just < 0.01) {
+          window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+          return;
+        }
+
+        by++;
+        if (by >= 10) {
+          you.textContent = by;
+          you.style.display = "block";
+        }
+
         const it = oh[got];
         got = (got + 1) % oh.length;
         it.currentTime = 0;
